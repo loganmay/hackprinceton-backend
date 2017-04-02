@@ -1,11 +1,5 @@
 {
-  "id": "123",
-<<<<<<< HEAD
-  "riding": true,
-  "name": "jack",
-=======
   "riding": false,
->>>>>>> 24df6b1dc0f0727d5b877c8934e1e1f44d2f8121
   "age": "54",
   "gender": "female",
   "nationality": "US",

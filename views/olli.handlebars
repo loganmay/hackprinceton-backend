@@ -27,51 +27,5 @@
   </div>
 </div>
 
-<<<<<<< HEAD
+
  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
- <script>
- 			var busKnows = false;
-  		function loop() {
-		 		var message = document.getElementById("message");
-		 		var int = 0;
-		 		var timerId = setInterval(() => messager(int), 10000);
-		 		var messager = function(i) {
-		 			if (i == 0) {
-		 				message.innerHTML = "Welcome aboard, " + "{{{user.name}}}" + "!";
-		 				console.log(message.innerHTML);
-		 			}
-		 			if (i == 1) {
-		 				message.innerHTML = "You can find a seat four steps to the left";
-		 			}
-		 			if (i == 2) {
-						message.innerHTML = "Would you like to listen to " + "{{{user.musicArtists}}}" + " today?";
-		 			}
-		 			if (i == 3) {
-						message.innerHTML = "Do you want to talk about " + "{{{user.conversationTopics}}}" + "?";
-		 			}
-		 			int += 1;
-		 		}
-	 		}
-
- 		window.onload = function() {
- 			setInterval(() => ajaxGet(), 500);
- 		}
-
-	  function ajaxGet () {
-			$.ajax('/bus/1', {
-				method: 'GET',
-				success: function(areRiders) {
-					if (areRiders == true && busKnows == false) {
-						busKnows = true;
-						loop();
-					} else if (areRiders == false && busKnows == true) {
-						busKnows = false;
-						message.innerHTML = "Waiting for another rider..."
-					}
-				}
-			})
-		}
- </script>
-=======
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
->>>>>>> 24df6b1dc0f0727d5b877c8934e1e1f44d2f8121

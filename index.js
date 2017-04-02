@@ -39,55 +39,13 @@ app.get('/olli', function(req,res){
   })
 })
 
-app.get('/bus/1', function(req,res) {
-	res.send(passenger);
-})
+// app.get('/bus/1', function(req,res) {
+// 	res.send(passenger);
+// })
 
 // ----- POST Routes
 app.post('/:userid', function(req,res) {
 
-<<<<<<< HEAD
-	passenger = !passenger;
-	var userID = req.params.userid;
-	var busID = "1";
-
-	// -- Update and act on user
-	var userFP = path.join(__dirname, 'db/users', userID) + '.json';
-	fs.readFile(userFP, {encoding: 'utf8'}, function (err, data) {
- 		var user = JSON.parse(data);
-		if (!user.riding) {
-			user.riding = true;
-			// TODO beginRide(user);
-		} else {
-			user.riding = false;
-			// TODO endRide(user);
-		}
-		// Update file
-		fs.unlinkSync(userFP);
-		fs.writeFileSync(userFP, JSON.stringify(user, null, 2), {encoding: 'utf8'});
-	});
-
-
-  // -- Update and act on bus
-	var busFP = path.join(__dirname, 'db/buses', busID) + '.json';
-	fs.readFile(busFP, {encoding: 'utf8'}, function (err, data) {
-
-   	var bus = JSON.parse(data);
-   	var userIndex = bus.riders.indexOf(userID)
-
-   	if(userIndex == -1) {
-   		bus.riders.push(userID);
-   	} else {
-    	bus.riders.splice(userIndex, 1);
-		}
-
-		// Update file
-		fs.unlinkSync(busFP);
-		fs.writeFileSync(busFP, JSON.stringify(bus, null, 2), {encoding: 'utf8'});
-		res.send(bus);
-
-	});
-=======
   var userID = req.params.userid;
   var name = req.query.name;
   var blind = req.query.blind;
@@ -148,8 +106,6 @@ app.post('/:userid', function(req,res) {
     fs.unlinkSync(userFP);
     fs.writeFileSync(userFP, JSON.stringify(user, null, 2), {encoding: 'utf8'});
   });
-
->>>>>>> 24df6b1dc0f0727d5b877c8934e1e1f44d2f8121
 });
 
 // Listen
