@@ -5,7 +5,40 @@
   "full": false,
   "riders": [
     "234",
+<<<<<<< HEAD
     "345",
     "123"
   ]
+=======
+    "345"
+  ],
+  "latest": {
+    "id": "123",
+    "riding": false,
+    "age": "54",
+    "gender": "female",
+    "nationality": "US",
+    "phone": "5706757880",
+    "homeAddress": "16 preston rd dallas pa",
+    "emergency phones": [
+      "5703012957"
+    ],
+    "langauges": [
+      "en"
+    ],
+    "preferredLanguage": "en",
+    "musicArtists": [
+      "The Rolling Stones"
+    ],
+    "conversationTopics": [
+      "Coffee"
+    ],
+    "disabilities": [
+      "deaf"
+    ],
+    "name": "Bo",
+    "blind": "T",
+    "deaf": "T"
+  }
+>>>>>>> 24df6b1dc0f0727d5b877c8934e1e1f44d2f8121
 }

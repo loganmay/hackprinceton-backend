@@ -1,3 +1,25 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io('http://localhost:5000');
+  socket.on('update-latest', function(user){
+    console.log('user: ' + user.name);
+    showMessage(user);
+  });
+
+  function showMessage(user) {
+    var message = document.getElementById("message");
+    var result = "Welcome aboard, " + user.name + "!";
+    if (user.deaf === "T") {
+      result = result + "<br/>Adjusting for hearing.";
+    }
+    if (user.blind === "T") {
+      resut = result + "<br/>Adjusting for eyesight.";
+      result = "<span style=\"font-size:150%\">" + result + "</span>";
+    }
+    message.innerHTML = result;
+  }
+</script>
+
 <div class="outer">
   <div class="middle">
       <h1 id="message" class="inner" style="font-size:48px; letter-spacing;-1px; text-transform:uppercase; font-weight:700;font-family: 'Roboto', sans-serif;">Waiting for riders...</h1>
@@ -5,6 +27,7 @@
   </div>
 </div>
 
+<<<<<<< HEAD
  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
  <script>
  			var busKnows = false;
@@ -49,3 +72,6 @@
 			})
 		}
  </script>
+=======
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+>>>>>>> 24df6b1dc0f0727d5b877c8934e1e1f44d2f8121
