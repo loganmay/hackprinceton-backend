@@ -11,10 +11,11 @@
   		function loop() {
 		 		var message = document.getElementById("message");
 		 		var int = 0;
-		 		var timerId = setInterval(() => messager(int), 3000);
+		 		var timerId = setInterval(() => messager(int), 10000);
 		 		var messager = function(i) {
 		 			if (i == 0) {
-		 			message.innerHTML = "Welcome aboard, " + "{{{user.name}}}" + "!";
+		 				message.innerHTML = "Welcome aboard, " + "{{{user.name}}}" + "!";
+		 				console.log(message.innerHTML);
 		 			}
 		 			if (i == 1) {
 		 				message.innerHTML = "You can find a seat four steps to the left";
