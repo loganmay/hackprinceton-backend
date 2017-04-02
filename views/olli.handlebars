@@ -1,27 +1,30 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io('http://localhost:5000');
+  socket.on('update-latest', function(user){
+    console.log('user: ' + user.name);
+    showMessage(user);
+  });
+
+  function showMessage(user) {
+    var message = document.getElementById("message");
+    var result = "Welcome aboard, " + user.name + "!";
+    if (user.deaf === "T") {
+      result = result + "<br/>Adjusting for hearing.";
+    }
+    if (user.blind === "T") {
+      resut = result + "<br/>Adjusting for eyesight.";
+      result = "<span style=\"font-size:150%\">" + result + "</span>";
+    }
+    message.innerHTML = result;
+  }
+</script>
+
 <div class="outer">
   <div class="middle">
-      <h1 id="message" class="inner" style="font-size:48px; letter-spacing;-1px; text-transform:uppercase; font-weight:700;font-family: 'Roboto', sans-serif;">Welcome aboard, {{{user.name}}}!</h1>
+      <h1 id="message" class="inner" style="font-size:48px; letter-spacing;-1px; text-transform:uppercase; font-weight:700;font-family: 'Roboto', sans-serif;">Waiting for riders...</h1>
     </div>
   </div>
 </div>
 
- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
- <script>
- 		window.onload = function() {
-	 		var message = document.getElementById("message");
-	 		var int = 0;
-	 		var timerId = setInterval(() => messager(int), 3000);
-	 		var messager = function(i) {
-	 			if (i == 0) {
-	 				message.innerHTML = "You can find a seat four steps to the left";
-	 			}
-	 			if (i == 1) {
-					message.innerHTML = "Would you like to listen to " + "{{{user.musicArtists}}}" + " today?";
-	 			}
-	 			if (i == 2) {
-					message.innerHTML = "Do you want to talk about " + "{{{user.conversationTopics}}}" + "?";
-	 			}
-	 			int += 1;
-	 		}
- 		}
- </script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

@@ -1,7 +1,6 @@
 {
   "id": "123",
   "riding": false,
-  "name": "jack",
   "age": "54",
   "gender": "female",
   "nationality": "US",
@@ -22,5 +21,8 @@
   ],
   "disabilities": [
     "deaf"
-  ]
+  ],
+  "name": "Bo",
+  "blind": "T",
+  "deaf": "T"
 }

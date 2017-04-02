@@ -6,5 +6,33 @@
   "riders": [
     "234",
     "345"
-  ]
+  ],
+  "latest": {
+    "id": "123",
+    "riding": false,
+    "age": "54",
+    "gender": "female",
+    "nationality": "US",
+    "phone": "5706757880",
+    "homeAddress": "16 preston rd dallas pa",
+    "emergency phones": [
+      "5703012957"
+    ],
+    "langauges": [
+      "en"
+    ],
+    "preferredLanguage": "en",
+    "musicArtists": [
+      "The Rolling Stones"
+    ],
+    "conversationTopics": [
+      "Coffee"
+    ],
+    "disabilities": [
+      "deaf"
+    ],
+    "name": "Bo",
+    "blind": "T",
+    "deaf": "T"
+  }
 }

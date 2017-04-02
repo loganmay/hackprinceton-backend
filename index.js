@@ -21,71 +21,98 @@ app.set('view engine', 'handlebars');
 
 // ----- GET Routes
 app.get('/olli', function(req,res){
-	var users = [];
-	fs.readdir('db/users', function(err,files) {
-		files.forEach(function(file) {
-			fs.readFile(path.join(__dirname, 'db/users', file), {encoding: 'utf8'}, function (err, data) {
-				var user = JSON.parse(data);
-				users.push(user);
-				if (users.length === files.length) {
-						res.render('olli', {
-							user: users[0]
-						});
-				}
-			})
-		})
-	})
+  var users = [];
+  fs.readdir('db/users', function(err,files) {
+    files.forEach(function(file) {
+      fs.readFile(path.join(__dirname, 'db/users', file), {encoding: 'utf8'}, function (err, data) {
+        var user = JSON.parse(data);
+        users.push(user);
+        if (users.length === files.length) {
+            res.render('olli', {
+              user: users[0]
+            });
+        }
+      })
+    })
+  })
 })
 
 // ----- POST Routes
 app.post('/:userid', function(req,res) {
 
-	console.log(req);
+  var userID = req.params.userid;
+  var name = req.query.name;
+  var blind = req.query.blind;
+  var deaf = req.query.deaf;
+  var busID = "1";
+  var user = null;
 
-	var userID = req.params.userid;
-	var busID = "1";
+  // -- Update and act on user
+  var userFP = path.join(__dirname, 'db/users', userID) + '.json';
+  fs.readFile(userFP, {encoding: 'utf8'}, function (err, data) {
+    user = JSON.parse(data);
+    if (!user.riding) {
+      user.riding = true;
+      // TODO beginRide(user);
+    } else {
+      user.riding = false;
+      // TODO endRide(user);
+    }
 
-	// -- Update and act on user
-	var userFP = path.join(__dirname, 'db/users', userID) + '.json';
-	fs.readFile(userFP, {encoding: 'utf8'}, function (err, data) {
- 		var user = JSON.parse(data);
-		if (!user.riding) {
-			user.riding = true;
-			// TODO beginRide(user);
-		} else {
-			user.riding = false;
-			// TODO endRide(user);
-		}
-		// Update file
-		fs.unlinkSync(userFP);
-		fs.writeFileSync(userFP, JSON.stringify(user, null, 2), {encoding: 'utf8'});
-	});
+    if (user.name !== name) {
+    	user.name = name;
+    }
 
+    if (user.blind !== blind) {
+    	user.blind = blind;
+    }
 
-  // -- Update and act on bus
-	var busFP = path.join(__dirname, 'db/buses', busID) + '.json';
-	fs.readFile(busFP, {encoding: 'utf8'}, function (err, data) {
+    if (user.deaf !== deaf) {
+    	user.deaf = deaf;
+    }
 
-   	var bus = JSON.parse(data);
-   	var userIndex = bus.riders.indexOf(userID)
+    // Sockets
+    io.sockets.emit('update-latest', user);
 
-   	if(userIndex == -1) {
-   		bus.riders.push(userID);
-   	} else {
-    	bus.riders.splice(userIndex, 1);
-		}
+     // -- Update and act on bus
+  	var busFP = path.join(__dirname, 'db/buses', busID) + '.json';
+  	fs.readFile(busFP, {encoding: 'utf8'}, function (err, data) {
 
-		// Update file
-		fs.unlinkSync(busFP);
-		fs.writeFileSync(busFP, JSON.stringify(bus, null, 2), {encoding: 'utf8'});
-		res.send(bus);
+    var bus = JSON.parse(data);
+    var userIndex = bus.riders.indexOf(userID)
 
-	});
+    if(userIndex == -1) {
+      bus.riders.push(userID);
+    } else {
+      bus.riders.splice(userIndex, 1);
+    }
+
+    bus.latest = user;
+
+    // Update file
+    fs.unlinkSync(busFP);
+    fs.writeFileSync(busFP, JSON.stringify(bus, null, 2), {encoding: 'utf8'});
+    res.send(bus);
+
+  	});
+
+    // Update file
+    fs.unlinkSync(userFP);
+    fs.writeFileSync(userFP, JSON.stringify(user, null, 2), {encoding: 'utf8'});
+  });
+
 });
 
-// Listen 
-app.listen(app.get('port'), function() {
+// Listen
+var server = app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
+});
+
+
+// Socket.io stuff
+var io = require('socket.io').listen(server);
+io.on('connection', function(socket){
+  console.log('a user connected');
 });
 
 // TODO for gyroscope, define a reply that activates a
