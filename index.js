@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var JSONStream = require('JSONStream');
 
 // Configure server
-app.set('port', (process.env.PORT || 17264));
+app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
 // Enable bodyParser
