@@ -3,7 +3,8 @@
   "version": "0.2.5",
   "description": "Backend for OlliHelps",
   "engines": {
-    "node": "5.9.1"
+    "node": "4.4.5",
+    "npm": "4.2.0"
   },
   "main": "index.js",
   "scripts": {
