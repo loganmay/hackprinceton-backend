@@ -23,10 +23,10 @@ app.set('view engine', 'handlebars');
 app.get('/', function(req, res) {
 	console.log("Still here");
 	var users = [];
-	fs.readdir('users', function(err, files){
+	fs.readdir('db/users', function(err, files){
 		if(err) throw err;
 		files.forEach(function(file) {
-    	 fs.readFile(path.join(__dirname, 'users', file), {encoding: 'utf8'}, function (err, data) {
+    	 fs.readFile(path.join(__dirname, 'db/users', file), {encoding: 'utf8'}, function (err, data) {
     	 	if(err) throw err;
        	var user = JSON.parse(data);
        	users.push(user);

@@ -4,10 +4,10 @@
   "name": "jackie medina",
   "age": "54",
   "gender": "female",
-  "nationality": "US"
+  "nationality": "US",
   "phone": "5706757880",
-  "homeAddress": "16 preston rd dallas pa"
-  "emergency phones": ["5703012957"]
+  "homeAddress": "16 preston rd dallas pa",
+  "emergency phones": ["5703012957"],
   "langauges": ["en"],
   "preferredLanguage": "en",
   "musicArtists": ["The Rolling Stones"],
