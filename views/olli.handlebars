@@ -1,27 +1,50 @@
 <div class="outer">
   <div class="middle">
-      <h1 id="message" class="inner" style="font-size:48px; letter-spacing;-1px; text-transform:uppercase; font-weight:700;font-family: 'Roboto', sans-serif;">Welcome aboard, {{{user.name}}}!</h1>
+      <h1 id="message" class="inner" style="font-size:48px; letter-spacing;-1px; text-transform:uppercase; font-weight:700;font-family: 'Roboto', sans-serif;">Waiting for riders...</h1>
     </div>
   </div>
 </div>
 
  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
  <script>
- 		window.onload = function() {
-	 		var message = document.getElementById("message");
-	 		var int = 0;
-	 		var timerId = setInterval(() => messager(int), 3000);
-	 		var messager = function(i) {
-	 			if (i == 0) {
-	 				message.innerHTML = "You can find a seat four steps to the left";
-	 			}
-	 			if (i == 1) {
-					message.innerHTML = "Would you like to listen to " + "{{{user.musicArtists}}}" + " today?";
-	 			}
-	 			if (i == 2) {
-					message.innerHTML = "Do you want to talk about " + "{{{user.conversationTopics}}}" + "?";
-	 			}
-	 			int += 1;
+ 			var busKnows = false;
+  		function loop() {
+		 		var message = document.getElementById("message");
+		 		var int = 0;
+		 		var timerId = setInterval(() => messager(int), 3000);
+		 		var messager = function(i) {
+		 			if (i == 0) {
+		 			message.innerHTML = "Welcome aboard, " + "{{{user.name}}}" + "!";
+		 			}
+		 			if (i == 1) {
+		 				message.innerHTML = "You can find a seat four steps to the left";
+		 			}
+		 			if (i == 2) {
+						message.innerHTML = "Would you like to listen to " + "{{{user.musicArtists}}}" + " today?";
+		 			}
+		 			if (i == 3) {
+						message.innerHTML = "Do you want to talk about " + "{{{user.conversationTopics}}}" + "?";
+		 			}
+		 			int += 1;
+		 		}
 	 		}
+
+ 		window.onload = function() {
+ 			setInterval(() => ajaxGet(), 500);
  		}
+
+	  function ajaxGet () {
+			$.ajax('/bus/1', {
+				method: 'GET',
+				success: function(areRiders) {
+					if (areRiders == true && busKnows == false) {
+						busKnows = true;
+						loop();
+					} else if (areRiders == false && busKnows == true) {
+						busKnows = false;
+						message.innerHTML = "Waiting for another rider..."
+					}
+				}
+			})
+		}
  </script>

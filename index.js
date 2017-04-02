@@ -19,6 +19,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+var passenger = false;
+
 // ----- GET Routes
 app.get('/olli', function(req,res){
 	var users = [];
@@ -37,11 +39,14 @@ app.get('/olli', function(req,res){
 	})
 })
 
+app.get('/bus/1', function(req,res) {
+	res.send(passenger);
+})
+
 // ----- POST Routes
 app.post('/:userid', function(req,res) {
 
-	console.log(req);
-
+	passenger = !passenger;
 	var userID = req.params.userid;
 	var busID = "1";
 

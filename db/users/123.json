@@ -1,6 +1,6 @@
 {
   "id": "123",
-  "riding": false,
+  "riding": true,
   "name": "jack",
   "age": "54",
   "gender": "female",
