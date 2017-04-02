@@ -1,0 +1,21 @@
+{
+  "person": [
+    {"id": "123123123"},
+    {"name": "jackie medina"},
+    {"phone": "5706757880"},
+    {"gender": "female"},
+    {"age": "54"},
+    {"nationality": "US"}
+    {"langauges": "en"}
+  ],
+  "ollie": [
+    {"disabilities": ["Deaf"]},
+    {"home": "16 preston rd dallas pa"},
+    {"emergency phones": ["5703012957"]},
+    {"music artists": ["The Rolling Stones"]},
+    {"conversation topics": ["Coffee"]}
+  ],
+  "restaurant": [
+  ]
+}
+
