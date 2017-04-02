@@ -49,6 +49,8 @@ app.get('/test', function (req, res) {
 // ----- POST Routes
 app.post('/:userid', function(req,res) {
 
+	console.log(req);
+
 	// Access bus
 	var busID = "1";
 	var userID = "123";
