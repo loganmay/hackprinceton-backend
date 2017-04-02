@@ -15,7 +15,8 @@
     "body-parser": "^1.17.1",
     "ejs": "2.4.1",
     "express": "4.13.3",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "express-handlebars": "^3.0.0"
   },
   "repository": {
     "type": "git",
