@@ -20,41 +20,30 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 // ----- GET Routes
-app.get('/', function(req, res) {
-	console.log("Still here");
-	var users = [];
-	fs.readdir('db/users', function(err, files){
-		if(err) throw err;
-		files.forEach(function(file) {
-    	 fs.readFile(path.join(__dirname, 'db/users', file), {encoding: 'utf8'}, function (err, data) {
-    	 	if(err) throw err;
-       	var user = JSON.parse(data);
-       	users.push(user);
-       	if (users.length === files.length) res.send(users);
-			});
-		});
-	});
-});
-
-// TODO page that shows what Olli is thinking
 app.get('/olli', function(req,res){
-	res.render('olli', {});
+	var users = [];
+	fs.readdir('db/users', function(err,files) {
+		files.forEach(function(file) {
+			fs.readFile(path.join(__dirname, 'db/users', file), {encoding: 'utf8'}, function (err, data) {
+				var user = JSON.parse(data);
+				users.push(user);
+				if (users.length === files.length) {
+						res.render('olli', {
+							user: users[0]
+						});
+				}
+			})
+		})
+	})
 })
-
-app.get('/test', function (req, res) {
-    res.render('home');
-});
-
 
 // ----- POST Routes
 app.post('/:userid', function(req,res) {
 
 	console.log(req);
 
-	// Access bus
+	var userID = req.params.userid;
 	var busID = "1";
-	var userID = "123";
-	// TODO ^ sync with Andrew
 
 	// -- Update and act on user
 	var userFP = path.join(__dirname, 'db/users', userID) + '.json';
