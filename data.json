@@ -1,0 +1,24 @@
+{
+	"buses": [
+		{ "id": "1", "operating": true, "occupied": true, "full": false, "riders": ["123","234","345"] },
+		{ "id": "2", "operating": true, "occupied": false, "full": false,"riders": [] }
+	],
+	"users": [
+		{ 
+			"id": "123", 
+			"riding": false,
+		  "name": "jackie medina",
+		  "age": "54",
+		  "gender": "female",
+		  "nationality": "US",
+		  "phone": "5706757880",
+		  "homeAddress": "16 preston rd dallas pa",
+		  "emergency phones": ["5703012957"],
+		  "langauges": ["en"],
+		  "preferredLanguage": "en",
+		  "musicArtists": ["The Rolling Stones"],
+		  "conversationTopics": ["Coffee"],
+		  "disabilities": ["deaf"]
+		}
+	]
+}

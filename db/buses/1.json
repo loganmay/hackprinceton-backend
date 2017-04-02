@@ -1,1 +1,11 @@
-{ "id": "1", "operating": true, "occupied": true,"riders": ["123","234","345"] }
+{
+  "id": "1",
+  "operating": true,
+  "occupied": true,
+  "full": false,
+  "riders": [
+    "234",
+    "345",
+    "123"
+  ]
+}

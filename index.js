@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-// GET Routes
+// ----- GET Routes
 app.get('/', function(req, res) {
 	console.log("Still here");
 	var users = [];
@@ -36,52 +36,60 @@ app.get('/', function(req, res) {
 	});
 });
 
+// TODO page that shows what Olli is thinking
+app.get('/olli', function(req,res){
+	res.render('olli', {});
+})
+
 app.get('/test', function (req, res) {
     res.render('home');
 });
 
-app.get('/:username', function(req, res) {
-	// var username = req.params.username;
-	// res.send(username);
-	res.render('home')
-});
 
-// POST Routes
-app.post('/:username', function(req,res) {
+// ----- POST Routes
+app.post('/:userid', function(req,res) {
+
+	// Access bus
 	var busID = "1";
-	var busFP = path.join(__dirname, 'db/buses', busID) + '.json';
-	var bus = JSON.parse(busFP);
 	var userID = "123";
+	// TODO ^ sync with Andrew
+
+	// -- Update and act on user
 	var userFP = path.join(__dirname, 'db/users', userID) + '.json';
-	var user = JSON.parse(userFP);
-	//  TODO sync ^ with Andrew's request
-
-	// Boarding
-	if (!user.riding && !bus.full) {
-
-		user.riding = true
-		bus.riders.push(userID);
-
-		fs.unlink(userFP);
-		fs.writeFileSync(userFP, JSON.stringify(user, null, 2), {encoding: 'utf8'})
-
-		fs.unlink(busFP);
-		fs.writeFileSync(busFP, JSON.stringify(bus, null, 2), {encoding: 'utf8'})
-
-		// TODO function welcomeUser (open door, etc.)
-		// TODO async always running loop function to handleUser/treatUser
-	}
-
-	// Exiting
-	if (user.riding) {
-		user.riding = false;
-		var userIndex = bus.riders.indexOf(userID);
-		if (userIndex > -1) {
-    	array.splice(userIndex, 1);
+	fs.readFile(userFP, {encoding: 'utf8'}, function (err, data) {
+ 		var user = JSON.parse(data);
+		if (!user.riding) {
+			user.riding = true;
+			// TODO beginRide(user);
+		} else {
+			user.riding = false;
+			// TODO endRide(user);
 		}
-		// TODO update db
-		// TODO say goodbye
-	}
+		// Update file
+		fs.unlinkSync(userFP);
+		fs.writeFileSync(userFP, JSON.stringify(user, null, 2), {encoding: 'utf8'});
+	});
+
+
+  // -- Update and act on bus
+	var busFP = path.join(__dirname, 'db/buses', busID) + '.json';
+	fs.readFile(busFP, {encoding: 'utf8'}, function (err, data) {
+
+   	var bus = JSON.parse(data);
+   	var userIndex = bus.riders.indexOf(userID)
+
+   	if(userIndex == -1) {
+   		bus.riders.push(userID);
+   	} else {
+    	bus.riders.splice(userIndex, 1);
+		}
+
+		// Update file
+		fs.unlinkSync(busFP);
+		fs.writeFileSync(busFP, JSON.stringify(bus, null, 2), {encoding: 'utf8'});
+		res.send(bus);
+
+	});
 });
 
 // Listen 
