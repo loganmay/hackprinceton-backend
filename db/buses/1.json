@@ -8,7 +8,6 @@
     "345"
   ],
   "latest": {
-    "id": "123",
     "riding": false,
     "age": "54",
     "gender": "female",
@@ -31,7 +30,7 @@
     "disabilities": [
       "deaf"
     ],
-    "name": "Bo",
+    "name": "Bob",
     "blind": "T",
     "deaf": "T"
   }

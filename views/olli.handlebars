@@ -1,6 +1,6 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  var socket = io('http://localhost:5000');
+  var socket = io();
   socket.on('update-latest', function(user){
     console.log('user: ' + user.name);
     showMessage(user);
